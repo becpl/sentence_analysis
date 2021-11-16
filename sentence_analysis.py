@@ -25,19 +25,21 @@ st.write("")
 st.write("")
 input_text = st.text_input(label="Please enter your sentence here so you can learn more about it:")
 st.sidebar.title("Select what you would like to learn more about")
-dropdown = st.sidebar.selectbox("Select one",["","sentence structure","NER"])
+dropdown = st.sidebar.selectbox("Select one",["","sentence structure","Named Entity Recognition"])
 text_1 = nlp(input_text)
 for token in text_1:
     print(token.text,token.lemma_,token.pos_,token.tag_,token.dep_,token.shape_,token.is_alpha)
 #will automatically detect just entities
-#spacy works better than nltk, but of course takes more time to download
 for word in text_1.ents:
     print(word.text, word.label_)
-if dropdown == "sentence structure":
+if dropdown == "Sentence structure":
     visualize_parser(text_1, title="Parts of a sentence")
     st.write("you can scroll across the image from left to right to see more")
     st.subheader("let's have a look at this sentence in more detail")
     for i in text_1:
-        st.write(i.text,"* is classed as *", i.tag_, ",* this means it is a *", spacy.explain(i.tag_))
-elif dropdown == "NER":
-    visualize_ner(text_1, labels=nlp.get_pipe("ner").labels)
+        st.write(i.text,"* is classed as *", i.pos_, ",* this means it is a *", spacy.explain(i.pos_))
+elif dropdown == "Named Entity Recognition":
+    visualize_ner(text_1, labels=nlp.get_pipe("ner").labels, title="Real World Objects", show_table=False)
+    st.subheader("so what does all this mean.....?")
+    for i in text_1.ents:
+        st.write(i.text,"* is classed as *", i.label_, ",* this means it is a *", spacy.explain(i.label_))
