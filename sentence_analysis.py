@@ -9,12 +9,12 @@ spacy.cli.download("en_core_web_sm")
 nlp = spacy.load("en_core_web_sm")
 
 #Setup the streamlit page to take user inputs
-template = """<div style = "background-color:red; padding:1px;">
-                <h2 style = "color=:white; text-align:center">Grammar app </h2>
-                </div>""" #allows multiple lines of html
+#template = """<div style = "background-color:red; padding:1px;">
+#                <h2 style = "color=:white; text-align:center">Grammar app </h2>
+#                </div>""" #allows multiple lines of html
 #css colour codes available online, basic css
-st.markdown(template,unsafe_allow_html=True) #tells streamlit to run the home written "unsafe" html above
-
+#st.markdown(template,unsafe_allow_html=True) #tells streamlit to run the home written "unsafe" html above
+st.title("Grammar app")
 st.write("")
 st.write("")
 st.write("This app will show you the different parts of a sentence")
@@ -34,7 +34,7 @@ for word in text_1.ents:
     print(word.text, word.label_)
 if dropdown == "Sentence structure":
     visualize_parser(text_1, title="Parts of a sentence")
-    st.write("you can scroll across the image from left to right to see more")
+    st.write("(you can scroll across the image from left to right to see more)")
     st.subheader("let's have a look at this sentence in more detail")
     for i in text_1:
         st.write(i.text,"* is classed as *", i.pos_, ",* this means it is a *", spacy.explain(i.pos_))
@@ -42,4 +42,4 @@ elif dropdown == "Named Entity Recognition":
     visualize_ner(text_1, labels=nlp.get_pipe("ner").labels, title="Real World Objects", show_table=False)
     st.subheader("so what does all this mean.....?")
     for i in text_1.ents:
-        st.write(i.text,"* is classed as *", i.label_, ",* this means it is a *", spacy.explain(i.label_))
+        st.write(i.text,"* is labelled as *", i.label_, ",* this means it is classed as being a *", spacy.explain(i.label_))
