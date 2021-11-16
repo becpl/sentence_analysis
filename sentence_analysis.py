@@ -25,7 +25,7 @@ st.write("")
 st.write("")
 input_text = st.text_input(label="Please enter your sentence here so you can learn more about it:")
 st.sidebar.title("Select what you would like to learn more about")
-dropdown = st.sidebar.selectbox("Select one",["","sentence structure","Named Entity Recognition"])
+dropdown = st.sidebar.selectbox("Select one",["","Sentence structure","Named Entity Recognition"])
 text_1 = nlp(input_text)
 for token in text_1:
     print(token.text,token.lemma_,token.pos_,token.tag_,token.dep_,token.shape_,token.is_alpha)
