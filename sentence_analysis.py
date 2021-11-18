@@ -1,6 +1,7 @@
 # Build a streamlit app that uses NER and NLP techniques at the backend and can be helpful to kids
 # in understanding the grammar concepts.
 import streamlit as st
+st.set_page_config(layout="wide")
 import spacy
 from spacy_streamlit import visualize_parser, visualize_ner
 from spacy import displacy
